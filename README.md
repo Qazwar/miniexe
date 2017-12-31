@@ -25,7 +25,7 @@ realize mainCRTstartup function,by [miniCRT](https://github.com/flydom/MiniCRT)
 ## 3,how to build?
 ```
 First install cmake, git clone ...
-cd ...
+cd .../src
 mkdir build
 cmake ../
 vs2017 build release
