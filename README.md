@@ -1,5 +1,5 @@
 # miniexe
-visual studio building minimum size exe,without import directory,remove the c run time library initialization code,but can dynamic call  C standard library from msvcrt.dll.
+A way to creating small executables with Microsoft Visual Studio,without import directory,remove the c run time library initialization code,but can dynamic call  C standard library from msvcrt.dll.
 
 All windows api and c api dynamic load from dll,include `Loadlibrary`,so we can building a exe without import directory.
 ## 1，how to work?
