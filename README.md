@@ -3,6 +3,7 @@ visual studio building minimum size exe,without import directory
 
 All windows api and c api dynamic load from dll.
 ## 1，how to work?
+```
 1,get kernel32.dll base from PEB
         |
         |
@@ -16,6 +17,7 @@ All windows api and c api dynamic load from dll.
         |
         |
 5,spec our entry point,do not link default c run time(/NODEFAULTLIB)
+```
 
 ## 2,how to spec entry point?
 realize mainCRTstartup function,by [miniCRT](https://github.com/flydom/MiniCRT)
