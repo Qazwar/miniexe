@@ -20,6 +20,7 @@ Use `Cmake-GUI` or console version if u want.
 On my PC, size of EXE only 2560Bytes(2.5 KB), it could be smaller, no run time dependence, all DLLs are windows original.
 
 x86
+
 ![](snipaste/x86.png)
 
 x64 
