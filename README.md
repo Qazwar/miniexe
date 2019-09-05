@@ -14,13 +14,8 @@ All windows `API` and `C API` dynamic load from `DLL`, include `Loadlibrary`, so
 Realize `mainCRTstartup` function, by [miniCRT](https://github.com/flydom/MiniCRT) 
 
 ## How to build? 
-''' 
-First install cmake, git clone ... 
-cd .../src 
-mkdir build 
-cmake ../ 
-vs2017 build release 
-''' 
+Use `Cmake-GUI` or console version if u want.
+
 On my PC, size of EXE only 2560Bytes(2.5 KB), it could be smaller, no run time dependence, all DLLs are windows original.
 ![](snipaste/x86.png)
 
