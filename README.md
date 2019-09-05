@@ -1,36 +1,30 @@
-# miniexe
-A way to creating small executables with Microsoft Visual Studio,without import directory,remove the c run time library initialization code,but can dynamic call  C standard library from msvcrt.dll.
+# miniexe 
+A way to creating small executables with Microsoft Visual Studio, without import directory, remove the `C runtime` library initialization code, but can dynamic call C standard library from msvcrt.dll. 
+ 
+All windows `API` and `C API` dynamic load from `DLL`, include `Loadlibrary`, so we can build an `EXE` without import directory.
 
-All windows api and c api dynamic load from dll,include `Loadlibrary`,so we can building a exe without import directory.
-## 1，how to work?
-```
-1,get kernel32.dll base from PEB
-        |
-        |
-2,get LoadLibraryA,... api address from kernel32.dll base
-        |
-        |
-3,load user32.dll and msvcrt.dll
-        |
-        |
-4,get others api by loaded mod's export table
-        |
-        |
-5,spec our entry point,do not link default c run time(/NODEFAULTLIB)
-```
+## How to work? 
+ 1. Get `kernel32.dll` base from PEB 
+ 2. Get `LoadLibraryA`, ... API address from `kernel32.dll` base 
+ 3. Load `user32.dll` and `msvcrt.dll` 
+ 4. Get others `API` by loaded mod's export table 
+ 5. Spec our entry point, do not link default `C run time`(/NODEFAULTLIB) 
+ 
+## How to spec entry point? 
+Realize `mainCRTstartup` function, by [miniCRT](https://github.com/flydom/MiniCRT) 
 
-## 2,how to spec entry point?
-realize mainCRTstartup function,by [miniCRT](https://github.com/flydom/MiniCRT)
+## How to build? 
+''' 
+First install cmake, git clone ... 
+cd .../src 
+mkdir build 
+cmake ../ 
+vs2017 build release 
+''' 
+On my PC, size of EXE only 2560Bytes(2.5 KB), it could be smaller, no run time dependence, all DLLs are windows original.
+![](snipaste/x86.png)
 
-## 3,how to build?
-```
-First install cmake, git clone ...
-cd .../src
-mkdir build
-cmake ../
-vs2017 build release
-```
-On my pc,size of exe only 2560Bytes(2.5KB),it could be smaller, no run time dependence,all dlls are windows original.
+x64 
+
 
 ![](snipaste/x64.png)
-
