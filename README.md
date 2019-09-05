@@ -32,5 +32,5 @@ vs2017 build release
 ```
 On my pc,size of exe only 2560Bytes(2.5KB),it could be smaller, no run time dependence,all dlls are windows original.
 
-![](snipaste/2019-09-05 07_16_42-CFF Explorer VIII - [miniexe.exe]_x64.png)
+![](snipaste/x64.png)
 
