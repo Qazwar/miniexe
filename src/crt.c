@@ -2,43 +2,42 @@
 #include "api.h"
 
 
-extern int main(int arge, char *argv[]);
+extern int main(int arge, char* argv[]);
 
-typedef enum _heap_type {
-	HEAP_BLOCK_FREE = 0xABABABAB,
-	HEAP_BLOCK_USED = 0xCDCDCDCD,
+typedef enum _heap_type
+{
+	HEAP_BLOCK_FREE = (int)0xABABABAB,
+	HEAP_BLOCK_USED = (int)0xCDCDCDCD,
 } heap_type;
 
 typedef struct _heap_header
 {
 	heap_type type;
 	unsigned size;
-	struct _heap_header *next;
-	struct _heap_header *prev;
+	struct _heap_header* next;
+	struct _heap_header* prev;
 } heap_header;
 
-#define ADDR_ADD(a, o)  ((char *)(a) + o)
+#define ADDR_ADD(a, o)  ((char *)(a) + (o))
 #define HEADER_SIZE (sizeof(heap_header))
 
-static heap_header *list_head = NULL;
+static heap_header* list_head = NULL;
 
 
 int mini_crt_heap_init()
 {
-	void *base = NULL;
-	heap_header *header = NULL;
-	unsigned heap_size = 1024 * 1024 * 32; // 32 MB heap size
+	const unsigned heap_size = 1024 * 1024 * 32; // 32 MB heap size
 
-	base =kernel32_api->VirtualAlloc_(0,
-		heap_size,
-		MEM_COMMIT | MEM_RESERVE,
-		PAGE_READWRITE);
+	void* base = kernel32_api->VirtualAlloc_(0,
+	                                         heap_size,
+	                                         MEM_COMMIT | MEM_RESERVE,
+	                                         PAGE_READWRITE);
 	if (base == NULL)
 	{
 		return 0;
 	}
 
-	header = (heap_header *)base;
+	heap_header* header = (heap_header *)base;
 
 	header->size = heap_size;
 	header->type = HEAP_BLOCK_FREE;
@@ -54,7 +53,7 @@ int mini_crt_io_init()
 	return 1;
 }
 
-static void crt_fatal_error(const char *msg)
+static void crt_fatal_error(const char* msg)
 {
 	msvcrt_api->printf_("fatal error: %s", msg);
 	msvcrt_api->exit_(1);
@@ -62,15 +61,13 @@ static void crt_fatal_error(const char *msg)
 
 void mini_crt_entry(void)
 {
-	int ret = 0;
 	int flag = 0;
 	int argc = 0;
-	char *argv[16];  
-	char *cl = NULL;
+	char* argv[16];
 
 	kernel32_api_t k_api;
-	user32_api_t   u_api;
-	msvcrt_api_t   m_api;
+	user32_api_t u_api;
+	msvcrt_api_t m_api;
 
 	kernel32_api = &k_api;
 	user32_api = &u_api;
@@ -85,7 +82,7 @@ void mini_crt_entry(void)
 
 	get_msvcrt_api();
 
-	cl = kernel32_api->GetCommandLineA_();
+	char* cl = kernel32_api->GetCommandLineA_();
 	argv[0] = cl;
 	argc++;
 	while (*cl)
@@ -108,6 +105,6 @@ void mini_crt_entry(void)
 	}
 
 	get_user32_api();
-	ret = main(argc, argv);
+	const int ret = main(argc, argv);
 	msvcrt_api->exit_(ret);
 }
