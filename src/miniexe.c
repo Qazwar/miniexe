@@ -1,7 +1,6 @@
 #include "getapi.h"
 #include "api.h"
 
-
 // converts string to lowercase
 uint32_t crc32c(const char* s)
 {
