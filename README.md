@@ -1,7 +1,8 @@
+
 # miniexe 
-A way to creating small executables with Microsoft Visual Studio, without import directory, remove the `C runtime` library initialization code, but can dynamic call C standard library from msvcrt.dll. 
+A way to creating small executables with Microsoft Visual Studio, without `import directory`, remove the `C runtime` library initialization code, but can  dynamic call `C standard library` from `msvcrt.dll`. 
  
-All windows `API` and `C API` dynamic load from `DLL`, include `Loadlibrary`, so we can build an `EXE` without import directory.
+All windows `API` and `C API` dynamic load from `DLL`, include `Loadlibrary`, so we can build an `EXE` without `import directory`.
 
 ## How to work? 
  1. Get `kernel32.dll` base from PEB 
